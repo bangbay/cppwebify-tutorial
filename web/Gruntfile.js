@@ -3,14 +3,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     auto_install: {
       local: {},
-      lib4ffi: {
-        options: {
-          cwd: '../cpp/lib4ffi',
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        }
-      },
       nodeprime: {
         options: {
           cwd: '../cpp/nodeprime',
@@ -54,14 +46,13 @@ module.exports = function(grunt) {
     },
     clean: {
       cpp: {
-        src: ['../cpp/standalone_usr/build/', 
+        src: ['../cpp/standalone_usr/build/',
               '../cpp/standalone_flex_file/build',
-              '../cpp/standalone_usr/build', 
-              '../cpp/nodeprime/build', 
-              '../cpp/nodeprime/node_modules', 
-              '../cpp/nodeprime_sync/build', 
-              '../cpp/nodeprime_sync/node_modules',
-              '../cpp/lib4ffi/build'],
+              '../cpp/standalone_usr/build',
+              '../cpp/nodeprime/build',
+              '../cpp/nodeprime/node_modules',
+              '../cpp/nodeprime_sync/build',
+              '../cpp/nodeprime_sync/node_modules'],
         options: {
           'force':true
         }
@@ -75,5 +66,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['auto_install']);
   grunt.registerTask('cleanup', ['clean:cpp']);
-  
+
 };
