@@ -2,38 +2,30 @@ doctype
 html(ng-app='primesApp')
   head
     title C++ Primes on the Web
-    script(src="//code.jquery.com/jquery-2.1.4.min.js")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css")
     script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js")
     script.
-        var primesApp = angular.module('primesApp', []);
+      var primesApp = angular.module('primesApp', []);
 
-        primesApp.controller('PrimesController', function ($scope, $http) {
-            $scope.results = [];
-            $scope.submit = function(target) {
-                $http.post('/' + target, {under:$scope.under})
-                    .then(function(docs)  {
-                        $scope.results = docs.data.results;
-                    });
-            };
-        });
-
-    style(type="text/css").
-        ol {
-            margin-top:1em;
-            list-style-position: inside;
-            -webkit-column-count: 5; /* Chrome, Safari, Opera */
-            -moz-column-count: 5; /* Firefox */
-            column-count: 5;
-        }
-        ol li {list-style-type: none;}
+      primesApp.controller('PrimesController', function ($scope, $http) {
+        $scope.results = [];
+        $scope.submit = function(target) {
+          $http.post('/' + target, {under:$scope.under})
+            .then(function(docs)  {
+              $scope.results = docs.data.results;
+            });
+        };
+      });
 
   body(ng-controller="PrimesController")
-    h1!= 'Calculate Prime Number using ' + target + ' technique.'
+    .container.mt-3
+      h1.h2
+        = 'Calculate Prime Number using ' + target + ' technique.'
 
-    form(ng-submit="submit('" + target + "')")
-        label(for="under") All primes under:  
-        input(ng-model="under")
-        button(type="submit") Submit
+      form.form-inline(ng-submit="submit('" + target + "')")
+        label.mr-3(for="under") All primes under:
+        input.form-control.mr-3(ng-model="under")
+        button.btn.btn-primary(type="submit") Submit
 
-    ol
+      ul
         li(ng-repeat="prime in results track by $index") {{prime}}

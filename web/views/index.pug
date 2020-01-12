@@ -1,11 +1,15 @@
+doctype
 html
   head
     title C++ Primes on the Web
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css")
   body
-    h1 Examples/Strategies
-
-    ol
-    each type in routes
-        li
-            a(href="/"+type.title)= type.title
-            .descrip= type.description
+    .container
+      h1.h2.mt-3 Examples/Strategies
+      ol
+        each type in routes
+          li
+            p
+              a(href="/"+type.title)= type.title
+              br
+              = type.description
