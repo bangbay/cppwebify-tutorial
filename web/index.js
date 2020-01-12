@@ -1,14 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
 
-app.use(express.static('public'));
-app.set('view engine', 'pug');
+app.use(express.static("public"));
+app.set("view engine", "pug");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set("port", process.argv[2] || 3000);
 
-var types = [
+const types = [
   {
     title: "pure_node",
     description: "Execute a really primitive implementation of prime sieve in Node.js"
@@ -37,13 +38,13 @@ var types = [
 
 
 types.forEach(function (type) {
-    app.use('/'+type.title, require('./routes/' + type.title));
+  app.use(`/${type.title}`, require(`./routes/${type.title}`));
 });
 
-app.get('/', function (req, res) {
-  res.render('index', { routes: types});
+app.get("/", function (req, res) {
+  res.render("index", { routes: types});
 });
 
-var server = app.listen(3000, function () {
-  console.log('Web server listing at http://localhost:%s', server.address().port);
+app.listen(app.get("port"), function () {
+  console.log(`App running at http://localhost:${app.get("port")}; press Ctrl-C to terminate.`);
 });
